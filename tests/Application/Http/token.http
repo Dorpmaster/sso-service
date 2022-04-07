@@ -1,0 +1,42 @@
+### Get JWT
+POST http://localhost:8280/api/v1/token
+Content-Type: application/json
+Accept: application/json
+Origin: localhost
+
+{
+  "email": "sso@jwt.test",
+  "password": "secret"
+}
+
+### Wrong Password
+POST http://localhost:8280/api/v1/token
+Content-Type: application/json
+Accept: application/json
+Origin: localhost
+
+{
+  "email": "sso@jwt.test",
+  "password": "test"
+}
+
+### Bad Request
+POST http://localhost:8280/api/v1/token
+Content-Type: application/json
+Accept: application/json
+Origin: localhost
+
+{
+  "email": ""
+}
+
+### Wrong User
+POST http://localhost:8280/api/v1/token
+Content-Type: application/json
+Accept: application/json
+Origin: localhost
+
+{
+  "email": "sso@aaa.bbb",
+  "password": "secret"
+}

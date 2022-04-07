@@ -1,0 +1,50 @@
+version: "3.9"
+services:
+  php:
+    build:
+      context: .
+      target: symfony_php
+      dockerfile: Dockerfile_production
+    restart: "no"
+    env_file: .env
+    environment:
+      - APP_ENV=prod
+    depends_on:
+      - redis
+    networks:
+      - default
+      - entrypoint
+    volumes:
+      - php_socket:/var/run/php
+
+  caddy:
+    build:
+      context: .
+      target: symfony_caddy
+      dockerfile: Dockerfile_production
+    depends_on:
+      - php
+    env_file: .env
+    restart: "no"
+    volumes:
+      - php_socket:/var/run/php
+    ports:
+      - "8280:80"
+      - "8243:443"
+
+  redis:
+    restart: "no"
+    image: redis:alpine
+    ports:
+      - "8279:6379"
+    command: [ "redis-server", "/redis.conf" ]
+    volumes:
+      - ./docker/redis.conf:/redis.conf
+
+networks:
+  default:
+  entrypoint:
+    external: true
+
+volumes:
+  php_socket:

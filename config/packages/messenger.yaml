@@ -1,0 +1,28 @@
+framework:
+    messenger:
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        # failure_transport: failed
+        serializer:
+            default_serializer: messenger.transport.symfony_serializer
+            symfony_serializer:
+                format: json
+
+        default_bus: eventbus
+        buses:
+            eventbus:
+
+        transports:
+            eventbus:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    exchange:
+                        name: eventbus
+                        type: topic
+                        default_publish_routing_key: entrypoint
+                    queues:
+                        sso_service:
+                            binding_keys:
+                                - !php/const Dorpm\EntrypointMessages\Service\SsoService::ROUTE
+
+        routing:
+            Dorpm\EntrypointMessages\Message\EventBusMessageInterface: eventbus

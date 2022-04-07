@@ -1,0 +1,15 @@
+{
+    debug
+    auto_https disable_redirects
+}
+
+{$SERVER_NAME}
+
+log
+
+route {
+    root * /srv/app/public
+    php_fastcgi unix//var/run/php/php-fpm.sock
+    encode zstd gzip
+    file_server
+}

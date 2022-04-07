@@ -1,0 +1,155 @@
+openapi: 3.0.1
+info:
+  title: SSO API
+  description: 'Single Sign On REST API'
+  version: 0.0.2
+servers:
+  - url: https://sso.entrypoint.io/api/v1
+tags:
+- name: jwt
+  description: Operations about JWT
+paths:
+  /token:
+    post:
+      tags:
+        - jwt
+      summary: Authenticates a user and provides JWT
+      description: Authenticates a user and provides JWT.
+      operationId: createJwt
+      requestBody:
+        $ref: '#/components/requestBodies/TokenBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/Token'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-codegen-request-body-name: body
+  /refresh:
+    post:
+      tags:
+        - jwt
+      summary: Authenticates a user by the Refresh Token and provides JWT
+      description: Authenticates a user by the Refresh Token and provides JWT.
+      operationId: refreshJwt
+      requestBody:
+        $ref: '#/components/requestBodies/RefreshTokenBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/Token'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-codegen-request-body-name: body
+components:
+  requestBodies:
+    TokenBody:
+      description: A JSON object containig user information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TokenPayload'
+    RefreshTokenBody:
+      description: A JSON object containig refresh token
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RefreshTokenPayload'
+  
+  responses:
+    Token:
+      description: JWT for authenticated user
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TokenResponsePayload'
+    Unauthorized:
+      description: User is not authorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The specified resource did not pass validation rules
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Somethig went wrong on the server side
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    #Schema for token request body
+    TokenPayload:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    #Schema for refresh token request body
+    RefreshTokenPayload:
+      type: object
+      required:
+        - refreshToken
+      properties:
+        refreshToken:
+          type: string
+    #Schema for token request response
+    TokenResponsePayload:
+      type: object
+      required:
+        - accessToken
+        - refreshToken
+        - expiresAt
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        expiresAt:
+          type: string
+          format: datetime
+          example: '2022-02-24T05:15:25+0100'
+    # Schema for error response body
+    Error:
+      type: object
+      required:
+        - errorCode
+        - errorMessage
+        - issues
+      properties:
+        errorCode:
+          type: string
+        errorMessage: 
+          type: string
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+    # Schema for issue information of the error
+    Issue:
+      type: object
+      required:
+        - issue
+        - location
+      properties:
+        issue:
+          type: string
+        location:
+          type: string

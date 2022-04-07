@@ -1,0 +1,9 @@
+### Refresh access token
+POST http://localhost:8280/api/v1/refresh
+Content-Type: application/json
+Accept: application/json
+Origin: localhost
+
+{
+  "refreshToken": "ad2361eff39bb8c7a703345c42ad5a7d7e4bd49a04d0344f10372e9c770ff236431b419265dd53409b17d2faa92c6d4b1983"
+}

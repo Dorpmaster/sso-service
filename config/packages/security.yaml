@@ -20,7 +20,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         token:
-            pattern: ^/api/v1/token
+            pattern: ^/api/v2/token
             stateless: true
             provider: jwt_provider
             json_login:
@@ -30,7 +30,7 @@ security:
                 username_path: email
                 password_path: password
         refresh:
-            pattern: ^/api/v1/refresh
+            pattern: ^/api/v2/refresh
             stateless: true
             provider: refresh_token_provider
             custom_authenticators:

@@ -1,9 +1,9 @@
 {
     debug
-    auto_https disable_redirects
+    auto_https off
 }
 
-{$SERVER_NAME}
+:80
 
 log
 

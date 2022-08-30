@@ -1,5 +1,5 @@
 ### Get JWT
-POST http://localhost:8280/api/v1/token
+POST http://localhost:8280/api/v2/token
 Content-Type: application/json
 Accept: application/json
 Origin: localhost
@@ -10,7 +10,7 @@ Origin: localhost
 }
 
 ### Wrong Password
-POST http://localhost:8280/api/v1/token
+POST http://localhost:8280/api/v2/token
 Content-Type: application/json
 Accept: application/json
 Origin: localhost
@@ -21,7 +21,7 @@ Origin: localhost
 }
 
 ### Bad Request
-POST http://localhost:8280/api/v1/token
+POST http://localhost:8280/api/v2/token
 Content-Type: application/json
 Accept: application/json
 Origin: localhost
@@ -31,7 +31,7 @@ Origin: localhost
 }
 
 ### Wrong User
-POST http://localhost:8280/api/v1/token
+POST http://localhost:8280/api/v2/token
 Content-Type: application/json
 Accept: application/json
 Origin: localhost

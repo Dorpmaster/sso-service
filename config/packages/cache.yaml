@@ -26,3 +26,11 @@ framework:
             cache.refresh_token:
                 adapter: cache.adapter.redis
                 default_lifetime: 86400
+
+            cache.service_provider:
+                adapter: cache.adapter.redis
+                default_lifetime: 60
+
+            ache.user_data:
+                adapter: cache.adapter.redis
+                default_lifetime: 30

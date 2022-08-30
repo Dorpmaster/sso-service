@@ -1,0 +1,11 @@
+{# templates/saml/unknown_povider.html.twig #}
+{% extends 'saml/layout.html.twig' %}
+
+{% block content %}
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Sorry, but...</h4>
+        <p>Looks like you are trying to use own Identity Provider, but your service provider is not registered in our system.</p>
+        <hr>
+        <p>Please contact your IT support department.</p>
+    </div>
+{% endblock %}

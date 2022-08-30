@@ -7,7 +7,7 @@ kernel:
     type: annotation
 
 api_token:
-    path: /api/v1/token
+    path: /api/v2/token
 
 api_refresh:
-    path: /api/v1/refresh
+    path: /api/v2/refresh

@@ -1,5 +1,5 @@
 ### Refresh access token
-POST http://localhost:8280/api/v1/refresh
+POST http://localhost:8280/api/v2/refresh
 Content-Type: application/json
 Accept: application/json
 Origin: localhost

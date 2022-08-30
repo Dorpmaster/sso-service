@@ -10,21 +10,26 @@
         "ext-amqp": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "dorpm/entrypoint-messages": "^1.0",
+        "ext-zlib": "*",
+        "dorpm/entrypoint-messages": "^2.0",
         "lexik/jwt-authentication-bundle": "^2.14",
+        "litesaml/lightsaml": "^4.0",
         "nelmio/cors-bundle": "^2.2",
         "ramsey/uuid": "^4.2",
-        "symfony/console": "6.0.*",
-        "symfony/dotenv": "6.0.*",
+        "symfony/console": "^6.0",
+        "symfony/dotenv": "^6.0",
         "symfony/flex": "^2",
-        "symfony/framework-bundle": "6.0.*",
-        "symfony/messenger": "6.0.*",
+        "symfony/form": "^6.0",
+        "symfony/framework-bundle": "^6.0",
+        "symfony/messenger": "^6.0",
         "symfony/monolog-bundle": "^3.7",
-        "symfony/runtime": "6.0.*",
-        "symfony/security-bundle": "6.0.*",
-        "symfony/serializer": "6.0.*",
-        "symfony/validator": "6.0.*",
-        "symfony/yaml": "6.0.*"
+        "symfony/runtime": "^6.0",
+        "symfony/security-bundle": "^6.0",
+        "symfony/serializer": "^6.0",
+        "symfony/twig-bundle": "^6.0",
+        "symfony/validator": "^6.0",
+        "symfony/yaml": "^6.0",
+        "twig/twig": "^3.0"
     },
     "config": {
         "allow-plugins": {
@@ -77,14 +82,14 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.0.*",
+            "require": "^6.0",
             "docker": true
         }
     },
     "require-dev": {
         "fakerphp/faker": "^1.19",
         "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "6.0.*",
+        "symfony/browser-kit": "^6.0",
         "symfony/maker-bundle": "^1.38",
         "symfony/phpunit-bridge": "^6.0"
     }

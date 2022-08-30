@@ -23,6 +23,7 @@ help-default help:
 	@echo "logs-caddy: Attach to Caddy logs"
 	@echo "stop-workers: Stops background workers"
 	@echo "start-workers: Starts background workers"
+	@echo "rw: Restarts background workers"
 	@echo "build-prod: Build production image"
 	@echo "up-prod: Creates and starts application from production image"
 	@echo "stop-prod: Stops production application"
@@ -74,3 +75,5 @@ stop-prod:
 
 down-prod:
 	docker-compose --project-name $(PROJECT_NAME)-prod -f docker-compose.yml down
+
+rw: stop-workers start-workers

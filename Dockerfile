@@ -1,5 +1,5 @@
 # https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
-ARG PHP_VERSION=8.1
+ARG PHP_VERSION=8.2
 ARG CADDY_VERSION=2
 
 # "php" stage
@@ -24,6 +24,7 @@ ARG APCU_VERSION=5.1.21
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
 		$PHPIZE_DEPS \
+        linux-headers \
 		icu-dev \
 		libzip-dev \
 		zlib-dev \
@@ -85,7 +86,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint
 
 VOLUME /var/run/php
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer/composer:2-bin /composer /usr/bin/composer
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -98,7 +99,7 @@ COPY . .
 
 RUN set -eux; \
 	mkdir -p var/cache var/log; \
-	composer install -o; \
+	composer install -o --ignore-platform-req=php; \
 	chmod +x bin/console; \
 	ln -s /usr/local/bin/docker-entrypoint.sh; \
 	sync
